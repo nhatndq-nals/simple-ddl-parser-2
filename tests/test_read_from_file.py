@@ -148,8 +148,109 @@ def test_parse_from_file_generated_by_default():
             "table_name": '"city_new"',
             "tablespace": None,
         },
+        {
+            "alter": {},
+            "checks": [
+                {"constraint_name": "authority_order_check", "statement": "order >= 0"}
+            ],
+            "columns": [
+                {
+                    "check": None,
+                    "default": None,
+                    "name": '"id"',
+                    "nullable": False,
+                    "references": None,
+                    "size": None,
+                    "type": "bigserial",
+                    "unique": False,
+                },
+                {
+                    "check": None,
+                    "default": None,
+                    "name": '"created_at"',
+                    "nullable": False,
+                    "references": None,
+                    "size": None,
+                    "type": "timestamptz",
+                    "unique": False,
+                },
+                {
+                    "check": None,
+                    "default": None,
+                    "name": '"updated_at"',
+                    "nullable": True,
+                    "references": None,
+                    "size": None,
+                    "type": "timestamptz",
+                    "unique": False,
+                },
+                {
+                    "check": None,
+                    "default": None,
+                    "name": '"app_div"',
+                    "nullable": False,
+                    "references": None,
+                    "size": None,
+                    "type": "int4",
+                    "unique": False,
+                },
+                {
+                    "check": None,
+                    "default": None,
+                    "name": '"name"',
+                    "nullable": False,
+                    "references": None,
+                    "size": 50,
+                    "type": "varchar",
+                    "unique": False,
+                },
+                {
+                    "check": None,
+                    "default": None,
+                    "name": '"key"',
+                    "nullable": False,
+                    "references": None,
+                    "size": 50,
+                    "type": "varchar",
+                    "unique": False,
+                },
+                {
+                    "check": None,
+                    "default": None,
+                    "name": '"order"',
+                    "nullable": False,
+                    "references": None,
+                    "size": None,
+                    "type": "int4",
+                    "unique": False,
+                },
+            ],
+            "constraints": {
+                "checks": [
+                    {
+                        "constraint_name": "authority_order_check",
+                        "statement": "order >= 0",
+                    }
+                ],
+                "primary_keys": [
+                    {"columns": ['"id"'], "constraint_name": "authority_pkey"}
+                ],
+            },
+            "index": [],
+            "partitioned_by": [],
+            "primary_key": ['"id"'],
+            "schema": "public",
+            "table_name": "authority",
+            "tablespace": None,
+        },
     ]
     current_path = os.path.dirname(os.path.abspath(__file__))
+
+    print(
+        parse_from_file(
+            os.path.join(current_path, "sql", "test_generated_by_default.sql")
+        )
+    )
     assert expected == parse_from_file(
         os.path.join(current_path, "sql", "test_generated_by_default.sql")
     )

@@ -3,5 +3,17 @@ CREATE TABLE "city_new" (
   "name" varchar(255) NOT NULL,
   "description" varchar,
   "created_at" timestamp,
-  "updated_at" timestamp
+  "updated_at" timestamp,
+);
+
+CREATE TABLE public.authority (
+	"id" bigserial NOT NULL,
+	"created_at" timestamptz NOT NULL,
+	"updated_at" timestamptz NULL,
+	"app_div" int4 NOT NULL,
+	"name" varchar(50) NOT NULL,
+	"key" varchar(50) NOT NULL,
+	"order" int4 NOT NULL,
+	CONSTRAINT authority_order_check CHECK ((order >= 0)),
+	CONSTRAINT authority_pkey PRIMARY KEY ("id"),
 );
