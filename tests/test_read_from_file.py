@@ -84,6 +84,77 @@ def test_parse_from_file_one_table():
     )
 
 
+def test_parse_from_file_generated_by_default():
+    expected = [
+        {
+            "alter": {},
+            "checks": [],
+            "columns": [
+                {
+                    "check": None,
+                    "default": None,
+                    "name": '"id"',
+                    "nullable": False,
+                    "references": None,
+                    "size": None,
+                    "type": "int8",
+                    "unique": False,
+                },
+                {
+                    "check": None,
+                    "default": None,
+                    "name": '"name"',
+                    "nullable": False,
+                    "references": None,
+                    "size": 255,
+                    "type": "varchar",
+                    "unique": False,
+                },
+                {
+                    "check": None,
+                    "default": None,
+                    "name": '"description"',
+                    "nullable": True,
+                    "references": None,
+                    "size": None,
+                    "type": "varchar",
+                    "unique": False,
+                },
+                {
+                    "check": None,
+                    "default": None,
+                    "name": '"created_at"',
+                    "nullable": True,
+                    "references": None,
+                    "size": None,
+                    "type": "timestamp",
+                    "unique": False,
+                },
+                {
+                    "check": None,
+                    "default": None,
+                    "name": '"updated_at"',
+                    "nullable": True,
+                    "references": None,
+                    "size": None,
+                    "type": "timestamp",
+                    "unique": False,
+                },
+            ],
+            "index": [],
+            "partitioned_by": [],
+            "primary_key": [],
+            "schema": None,
+            "table_name": '"city_new"',
+            "tablespace": None,
+        },
+    ]
+    current_path = os.path.dirname(os.path.abspath(__file__))
+    assert expected == parse_from_file(
+        os.path.join(current_path, "sql", "test_generated_by_default.sql")
+    )
+
+
 def test_parse_from_file_two_statements():
     expected = [
         {
@@ -201,6 +272,7 @@ def test_parse_from_file_two_statements():
             "checks": [],
         },
     ]
+    # expected = [{"data": []}]
     current_path = os.path.dirname(os.path.abspath(__file__))
     assert expected == parse_from_file(
         os.path.join(current_path, "sql", "test_two_tables.sql")
