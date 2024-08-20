@@ -293,6 +293,7 @@ def test_several_indexes_types():
                             {"name": "extra_funds", "nulls": "LAST", "order": "ASC"}
                         ],
                         "index_name": "i1",
+                        "index_type": None,
                         "unique": False,
                     },
                     {
@@ -303,6 +304,7 @@ def test_several_indexes_types():
                             {"name": "create_date", "nulls": "LAST", "order": "ASC"},
                         ],
                         "index_name": "i2",
+                        "index_type": None,
                         "unique": False,
                     },
                     {
@@ -314,6 +316,7 @@ def test_several_indexes_types():
                             {"name": "ending_funds", "nulls": "LAST", "order": "DESC"},
                         ],
                         "index_name": "i3",
+                        "index_type": None,
                         "unique": True,
                     },
                     {
@@ -323,6 +326,7 @@ def test_several_indexes_types():
                             {"name": "info", "nulls": "FIRST", "order": "ASC"}
                         ],
                         "index_name": "test2_info_nulls_low",
+                        "index_type": None,
                         "unique": False,
                     },
                     {
@@ -332,6 +336,7 @@ def test_several_indexes_types():
                             {"name": "id", "nulls": "LAST", "order": "DESC"}
                         ],
                         "index_name": "test3_desc_index",
+                        "index_type": None,
                         "unique": False,
                     },
                 ],
@@ -637,6 +642,7 @@ def test_clustered_index():
                             {"name": "extra_funds", "nulls": "LAST", "order": "ASC"}
                         ],
                         "index_name": "i1",
+                        "index_type": None,
                         "unique": False,
                     },
                     {
@@ -647,6 +653,7 @@ def test_clustered_index():
                             {"name": "create_date", "nulls": "LAST", "order": "ASC"},
                         ],
                         "index_name": "i2",
+                        "index_type": None,
                         "unique": False,
                     },
                 ],
@@ -771,6 +778,7 @@ def test_indexes_in_table_wint_no_schema():
             "index": [
                 {
                     "index_name": "pipeline_pk",
+                    "index_type": None,
                     "unique": True,
                     "columns": ["job_id"],
                     "detailed_columns": [
@@ -779,6 +787,7 @@ def test_indexes_in_table_wint_no_schema():
                 },
                 {
                     "index_name": "pipeline_ix2",
+                    "index_type": None,
                     "unique": False,
                     "columns": ["pipeline_id", "elapse_time", "status"],
                     "detailed_columns": [
@@ -813,6 +822,7 @@ def test_indexes_in_table():
         ) ;
     create unique index pipeline_pk on dev.pipeline (job_id) ;
     create index pipeline_ix2 on dev.pipeline (pipeline_id, elapse_time, status) ;
+    create index pipeline_ix3 ON dev.pipeline USING btree (pipeline_id);
     """
     ).run()
     expected = [
@@ -905,6 +915,7 @@ def test_indexes_in_table():
             "index": [
                 {
                     "index_name": "pipeline_pk",
+                    "index_type": None,
                     "unique": True,
                     "detailed_columns": [
                         {"name": "job_id", "nulls": "LAST", "order": "ASC"}
@@ -913,6 +924,7 @@ def test_indexes_in_table():
                 },
                 {
                     "index_name": "pipeline_ix2",
+                    "index_type": None,
                     "unique": False,
                     "columns": ["pipeline_id", "elapse_time", "status"],
                     "detailed_columns": [
@@ -920,6 +932,15 @@ def test_indexes_in_table():
                         {"name": "elapse_time", "nulls": "LAST", "order": "ASC"},
                         {"name": "status", "nulls": "LAST", "order": "ASC"},
                     ],
+                },
+                {
+                    "columns": ["pipeline_id"],
+                    "detailed_columns": [
+                        {"name": "pipeline_id", "nulls": "LAST", "order": "ASC"}
+                    ],
+                    "index_name": "pipeline_ix3",
+                    "index_type": "btree",
+                    "unique": False,
                 },
             ],
             "table_name": "pipeline",

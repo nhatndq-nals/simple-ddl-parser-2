@@ -579,7 +579,7 @@ def test_alter_foreiggn_with_constraint():
         FirstName varchar(255),
         Age int,
         City varchar(255),
-        CONSTRAINT CHK_Person CHECK (Age>=18 AND City='Sandnes')
+        CONSTRAINT CHK_Person CHECK ((Age>=18 AND City='Sandnes'))
         );
 
         Alter Table Persons ADD CONSTRAINT fk_group FOREIGN KEY (id) REFERENCES employees (id);

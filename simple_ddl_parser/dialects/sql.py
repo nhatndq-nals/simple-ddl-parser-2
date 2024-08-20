@@ -1035,8 +1035,19 @@ class BaseSQL(
             else:
                 p[0] = {p[1]: "()"}
 
+    def p_index_type(self, p: List) -> None:
+        """index_type : id"""
+
+        p[0] = p[1]
+        p_list = list(p)
+        p[0] = {
+            "index_type": p_list[-1]
+        }
+
     def p_expression_index(self, p: List) -> None:
-        """expr : index_table_name LP index_pid RP"""
+        """expr : index_table_name LP index_pid RP
+        | index_table_name USING index_type LP index_pid RP
+        """
         p_list = remove_par(list(p))
         p[0] = p[1]
         for item in ["detailed_columns", "columns"]:
@@ -1044,6 +1055,8 @@ class BaseSQL(
                 p[0][item] = p_list[-1][item]
             else:
                 p[0][item].extend(p_list[-1][item])
+
+        p[0]["index_type"] = p_list[-2]["index_type"] if "USING" in p_list else None
 
     def p_index_table_name(self, p: List) -> None:
         """index_table_name : create_index ON id
@@ -1673,17 +1686,30 @@ class BaseSQL(
         | CHECK LP f_call RP
         | CHECK LP id_equals
         | CHECK LP in_statement RP
+        | CHECK LP LP multi_id_statement RP RP
+        | CHECK LP LP f_call id id RP RP
+        | CHECK LP LP f_call id RP RP
+        | CHECK LP LP f_call RP RP
+        | CHECK LP LP id_equals
+        | CHECK LP LP in_statement RP RP
         | check_st id
         | check_st STRING
         | check_st id STRING
         | check_st LP id RP
         | check_st STRING RP
+        | check_st LP id RP RP
+        | check_st STRING RP RP
         | check_st funct_args
         | CHECK LP id DOT id RP
         | CHECK LP id RP
         | CHECK LP pid RP
         | check_st id RP
         | check_st id_equals RP
+        | CHECK LP LP id DOT id RP RP
+        | CHECK LP LP id RP RP
+        | CHECK LP LP pid RP RP
+        | check_st id RP RP
+        | check_st id_equals RP RP
         """
         p_list = remove_par(list(p))
         if isinstance(p[1], dict):

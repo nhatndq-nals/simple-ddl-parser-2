@@ -1027,6 +1027,7 @@ def test_index_without_schema():
                         {"name": "val", "nulls": "LAST", "order": "ASC"}
                     ],
                     "index_name": "idx1",
+                    "index_type": None,
                     "unique": False,
                 }
             ],
