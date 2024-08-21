@@ -1,4 +1,4 @@
-from simple_ddl_parser import DDLParser
+from simple_ddl_parser_2 import DDLParser
 
 
 def test_spark_sql_using():

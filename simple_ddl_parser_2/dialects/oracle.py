@@ -1,6 +1,6 @@
 from typing import List
 
-from simple_ddl_parser.utils import remove_par
+from simple_ddl_parser_2.utils import remove_par
 
 
 class Oracle:

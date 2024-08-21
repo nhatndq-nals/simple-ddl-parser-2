@@ -1,6 +1,6 @@
 import pytest
 
-from simple_ddl_parser import utils
+from simple_ddl_parser_2 import utils
 
 
 @pytest.mark.parametrize(

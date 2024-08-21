@@ -6,15 +6,15 @@ Simple DDL Parser
 .. image:: https://img.shields.io/pypi/v/simple-ddl-parser
    :target: https://img.shields.io/pypi/v/simple-ddl-parser
    :alt: badge1
- 
+
 .. image:: https://img.shields.io/pypi/l/simple-ddl-parser
    :target: https://img.shields.io/pypi/l/simple-ddl-parser
    :alt: badge2
- 
+
 .. image:: https://img.shields.io/pypi/pyversions/simple-ddl-parser
    :target: https://img.shields.io/pypi/pyversions/simple-ddl-parser
    :alt: badge3
- 
+
 .. image:: https://github.com/xnuinside/simple-ddl-parser/actions/workflows/main.yml/badge.svg
    :target: https://github.com/xnuinside/simple-ddl-parser/actions/workflows/main.yml/badge.svg
    :alt: workflow
@@ -33,7 +33,7 @@ Articles with examples
 ^^^^^^^^^^^^^^^^^^^^^^
 
 
-#. SQL Diagram (Part 3): SQL-to-ERD with DDL: https://levelup.gitconnected.com/sql-diagram-part-3-sql-to-erd-with-ddl-4c9840ee86c3 
+#. SQL Diagram (Part 3): SQL-to-ERD with DDL: https://levelup.gitconnected.com/sql-diagram-part-3-sql-to-erd-with-ddl-4c9840ee86c3
 
 Updates in version 1.x
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -45,7 +45,7 @@ Version 1.0.0 was released due to significant changes in the output structure an
 How does it work?
 ^^^^^^^^^^^^^^^^^
 
-Parser supports: 
+Parser supports:
 
 
 * SQL
@@ -60,12 +60,12 @@ Parser supports:
 * SparkSQL
 * IBM DB2 dialect
 
-You can check dialects sections after ``Supported Statements`` section to get more information that statements from dialects already supported by parser. If you need to add more statements or new dialects - feel free to open the issue. 
+You can check dialects sections after ``Supported Statements`` section to get more information that statements from dialects already supported by parser. If you need to add more statements or new dialects - feel free to open the issue.
 
 Feel free to open Issue with DDL sample
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Pay attentions that I'm adding functional tests for all supported statement, so if you see that your statement is failed and you didn't see it in the test 99,9% that I did n't have sample with such SQL statement - so feel free to open the issue and I will add support for it. 
+Pay attentions that I'm adding functional tests for all supported statement, so if you see that your statement is failed and you didn't see it in the test 99,9% that I did n't have sample with such SQL statement - so feel free to open the issue and I will add support for it.
 
 **If you need some statement, that not supported by parser yet**\ : please provide DDL example & information about that is it SQL dialect or DB.
 
@@ -141,7 +141,7 @@ And you will get output with additional keys 'stored_as', 'location', 'external'
        'row_format': 'DELIMITED',
        'schema': 'default',
        'stored_as': 'TEXTFILE',
-       ... 
+       ...
      }
 
 If you run parser with command line add flag '-o=hql' or '--output-mode=hql' to get the same result.
@@ -153,7 +153,7 @@ From python code
 
 .. code-block:: python
 
-       from simple_ddl_parser import DDLParser
+       from simple_ddl_parser_2 import DDLParser
 
 
        parse_results = DDLParser("""create table dev.data_sync_history(
@@ -174,7 +174,7 @@ To parse from file
 .. code-block:: python
 
 
-       from simple_ddl_parser import parse_from_file
+       from simple_ddl_parser_2 import parse_from_file
 
        result = parse_from_file('tests/sql/test_one_statement.sql')
        print(result)
@@ -223,7 +223,7 @@ If you want to get output in JSON in stdout you can use argument **json_dump=Tru
 
 .. code-block:: python
 
-       from simple_ddl_parser import DDLParser
+       from simple_ddl_parser_2 import DDLParser
 
 
        parse_results = DDLParser("""create table dev.data_sync_history(
@@ -252,10 +252,10 @@ To make work little bit easy you can set group_by_type=True and you will get out
 .. code-block:: python
 
 
-       { 
-           'tables': [all_pasrsed_tables], 
-           'sequences': [all_pasrsed_sequences], 
-           'types': [all_pasrsed_types], 
+       {
+           'tables': [all_pasrsed_tables],
+           'sequences': [all_pasrsed_sequences],
+           'types': [all_pasrsed_types],
            'domains': [all_pasrsed_domains],
            ...
        }
@@ -354,7 +354,7 @@ Normalize names
 
 Use DDLParser(.., normalize_names=True)flag that change output of parser:
 If flag is True (default 'False') then all identifiers will be returned without '[', '"' and other delimiters that used in different SQL dialects to separate custom names from reserved words & statements.
-For example, if flag set 'True' and you pass this input: 
+For example, if flag set 'True' and you pass this input:
 
 CREATE TABLE [dbo].\ `TO_Requests <[Request_ID] [int] IDENTITY(1,1>`_ NOT NULL,
     [user_id] [int]
@@ -365,43 +365,43 @@ Supported Statements
 --------------------
 
 
-* 
+*
   CREATE [OR REPLACE] TABLE [ IF NOT EXISTS ] + columns definition, columns attributes: column name + type + type size(for example, varchar(255)), UNIQUE, PRIMARY KEY, DEFAULT, CHECK, NULL/NOT NULL, REFERENCES, ON DELETE, ON UPDATE,  NOT DEFERRABLE, DEFERRABLE INITIALLY, GENERATED ALWAYS, STORED, COLLATE
 
-* 
+*
   STATEMENTS: PRIMARY KEY, CHECK, FOREIGN KEY in table definitions (in create table();)
 
-* 
+*
   ALTER TABLE STATEMENTS: ADD CHECK (with CONSTRAINT), ADD FOREIGN KEY (with CONSTRAINT), ADD UNIQUE, ADD DEFAULT FOR, ALTER TABLE ONLY, ALTER TABLE IF EXISTS; ALTER .. PRIMARY KEY; ALTER .. USING INDEX TABLESPACE; ALTER .. ADD; ALTER .. MODIFY; ALTER .. ALTER COLUMN; etc
 
-* 
+*
   PARTITION BY statement
 
-* 
+*
   CREATE SEQUENCE with words: INCREMENT [BY], START [WITH], MINVALUE, MAXVALUE, CACHE
 
-* 
+*
   CREATE TYPE statement:  AS TABLE, AS ENUM, AS OBJECT, INTERNALLENGTH, INPUT, OUTPUT
 
-* 
+*
   LIKE statement (in this and only in this case to output will be added 'like' keyword with information about table from that we did like - 'like': {'schema': None, 'table_name': 'Old_Users'}).
 
-* 
+*
   TABLESPACE statement
 
-* 
+*
   COMMENT ON statement
 
-* 
+*
   CREATE SCHEMA [IF NOT EXISTS] ... [AUTHORIZATION] ...
 
-* 
+*
   CREATE DOMAIN [AS]
 
-* 
+*
   CREATE [SMALLFILE | BIGFILE] [TEMPORARY] TABLESPACE statement
 
-* 
+*
   CREATE DATABASE + Properties parsing
 
 SparkSQL Dialect statements
@@ -423,13 +423,13 @@ HQL Dialect statements
 * FIELDS TERMINATED BY, LINES TERMINATED BY, COLLECTION ITEMS TERMINATED BY, MAP KEYS TERMINATED BY
 * TBLPROPERTIES ('parquet.compression'='SNAPPY' & etc.)
 * SKEWED BY
-* CLUSTERED BY 
+* CLUSTERED BY
 
 MySQL
 ^^^^^
 
 
-* ON UPDATE in column without reference 
+* ON UPDATE in column without reference
 
 MSSQL
 ~~~~~
@@ -452,7 +452,7 @@ MSSQL / MySQL/ Oracle
 * 'max' specifier in column size
 * CONSTRAINT ... UNIQUE, CONSTRAINT ... CHECK, CONSTRAINT ... FOREIGN KEY, CONSTRAINT ... PRIMARY KEY
 * CREATE CLUSTERED INDEX
-* CREATE TABLE (...) ORGANIZATION INDEX 
+* CREATE TABLE (...) ORGANIZATION INDEX
 
 Oracle
 ^^^^^^
@@ -465,7 +465,7 @@ PotgreSQL
 ^^^^^^^^^
 
 
-* INHERITS table statement - https://postgrespro.ru/docs/postgresql/14/ddl-inherit 
+* INHERITS table statement - https://postgrespro.ru/docs/postgresql/14/ddl-inherit
 
 AWS Redshift Dialect statements
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -473,10 +473,10 @@ AWS Redshift Dialect statements
 
 * ENCODE column property
 * SORTKEY, DISTSTYLE, DISTKEY, ENCODE table properties
-* 
+*
   CREATE TEMP / TEMPORARY TABLE
 
-* 
+*
   syntax like with LIKE statement:
 
   ``create temp table tempevent(like event);``
@@ -487,7 +487,7 @@ Snowflake Dialect statements
 
 * CREATE .. CLONE statements for table, database and schema
 * CREATE TABLE [or REPLACE] [ TRANSIENT | TEMPORARY ] .. CLUSTER BY ..
-* CONSTRAINT .. [NOT] ENFORCED 
+* CONSTRAINT .. [NOT] ENFORCED
 * COMMENT = in CREATE TABLE & CREATE SCHEMA statements
 * WITH MASKING POLICY
 * WITH TAG, including multiple tags in the same statement.
@@ -542,7 +542,7 @@ https://github.com/PBalsdon
 Big thanks for the involving & contribution with test cases with DDL samples & opening issues goes to:
 
 
-* https://github.com/kukigai , 
+* https://github.com/kukigai ,
 * https://github.com/kliushnichenko ,
 * https://github.com/geob3d
 
@@ -563,16 +563,16 @@ IMPORTANT:
 In this versions there is some output changes & fixes that can break your code.
 
 
-#. 
+#.
    Now all arguments inside brackets are parsed as separate strings in the list.
    For example:
    ``file_format = (TYPE=JSON NULL_IF=('field')`` this was parsed like 'NULL_IF': "('field')",
    now it will be: 'NULL_IF': ["'field'"],
 
-#. 
+#.
    Added separate tokens for EQ ``=`` and IN (previously they was parsed as IDs also - for internal info, for contributors.
 
-#. 
+#.
    Some check statements in columns now parsed validly, also IN statements parsed as normal lists.
    So this statement include_exclude_ind CHAR(1) NOT NULL CONSTRAINT chk_metalistcombo_logicalopr
    CHECK (include_exclude_ind IN ('I', 'E')),
@@ -812,39 +812,39 @@ Important changes
 ^^^^^^^^^^^^^^^^^
 
 
-#. Important change: 
+#. Important change:
 
 all custom table properties that are defined after column definition in 'CREATE TABLE' statement and relative to only one dialect (only for SparkSQL, or HQL,etc), for example, like here:
 https://github.com/xnuinside/simple-ddl-parser/blob/main/tests/dialects/test_snowflake.py#L767  or https://github.com/xnuinside/simple-ddl-parser/blob/main/tests/dialects/test_spark_sql.py#L133 will be saved now in property ``table_properties`` as dict.
 Previously they was placed on same level of table output as ``columns``\ , ``alter``\ , etc. Now, they grouped and moved to key ``table_properties``.
 
 
-#. 
+#.
    Formatting parser result now represented by 2 classes - Output & TableData, that makes it more strict and readable.
 
-#. 
-   The output mode now functions more strictly. If you want to obtain output fields specific to a certain dialect, 
-   use output_mode='snowflake' for Snowflake or output_mode='hql' for HQL, etc. 
-   Previously, some keys appeared in the result without being filtered by dialect. 
-   For example, if 'CLUSTER BY' was in the DDL, it would show up in the 'cluster_by' field regardless of the output mode. 
-   However, now all fields that only work in certain dialects and are not part of the basic SQL notation will only be shown 
+#.
+   The output mode now functions more strictly. If you want to obtain output fields specific to a certain dialect,
+   use output_mode='snowflake' for Snowflake or output_mode='hql' for HQL, etc.
+   Previously, some keys appeared in the result without being filtered by dialect.
+   For example, if 'CLUSTER BY' was in the DDL, it would show up in the 'cluster_by' field regardless of the output mode.
+   However, now all fields that only work in certain dialects and are not part of the basic SQL notation will only be shown
    if you choose the correct output_mode.
 
 New Dialects support
 ^^^^^^^^^^^^^^^^^^^^
 
 
-#. Added as possible output_modes new Dialects: 
+#. Added as possible output_modes new Dialects:
 
 
-* Databricks SQL like 'databricks', 
-* Vertica as 'vertica', 
+* Databricks SQL like 'databricks',
+* Vertica as 'vertica',
 * SqliteFields as 'sqlite',
 * PostgreSQL as 'postgres'
 
 Full list of supported dialects you can find in dict - ``supported_dialects``\ :
 
-``from simple_ddl_parser import supported_dialects``
+``from simple_ddl_parser_2 import supported_dialects``
 
 Currently supported: ['redshift', 'spark_sql', 'mysql', 'bigquery', 'mssql', 'databricks', 'sqlite', 'vertics', 'ibm_db2', 'postgres', 'oracle', 'hql', 'snowflake', 'sql']
 
@@ -894,7 +894,7 @@ Fixes
 
 
 #. Include source column names in FOREIGN KEY references. Fix for: https://github.com/xnuinside/simple-ddl-parser/issues/196
-#. ALTER statement now will be parsed correctly if names & schemas written differently in ``create table`` statement and alter. 
+#. ALTER statement now will be parsed correctly if names & schemas written differently in ``create table`` statement and alter.
    For example, if in create table you use quotes like "schema_name"."table_name", but in alter was schema_name.table_name - previously it didn't work, but now parser understand that it is the same table.
 
 **v0.31.3**
@@ -978,12 +978,12 @@ New Features:
 ^^^^^^^^^^^^^
 
 
-#. 
+#.
    IN TABLESPACE IBM DB2 statement now is parsed into 'tablespace' key. Issue: https://github.com/xnuinside/simple-ddl-parser/issues/194.
    INDEX IN also parsed to 'index_in' key.
    Added support for ORGANIZE BY statement
 
-#. 
+#.
    Added support for PostgreSQL INHERITS statement. Issue: https://github.com/xnuinside/simple-ddl-parser/issues/191
 
 **v0.29.1**

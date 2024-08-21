@@ -3,9 +3,9 @@ import logging
 import os
 from typing import Dict, List
 
-from simple_ddl_parser.output.dialects import dialects_clean_up
-from simple_ddl_parser.output.table_data import TableData
-from simple_ddl_parser.utils import get_table_id
+from simple_ddl_parser_2.output.dialects import dialects_clean_up
+from simple_ddl_parser_2.output.table_data import TableData
+from simple_ddl_parser_2.utils import get_table_id
 
 logger = logging.getLogger("simple_ddl_parser")
 

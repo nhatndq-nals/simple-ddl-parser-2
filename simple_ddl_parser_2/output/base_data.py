@@ -2,7 +2,7 @@ from copy import deepcopy
 from dataclasses import dataclass, field
 from typing import Any, Dict, Hashable, List, Optional
 
-from simple_ddl_parser.utils import normalize_name
+from simple_ddl_parser_2.utils import normalize_name
 
 
 @dataclass

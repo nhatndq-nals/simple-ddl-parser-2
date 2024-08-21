@@ -1,6 +1,6 @@
 import json
 
-from simple_ddl_parser import DDLParser
+from simple_ddl_parser_2 import DDLParser
 
 
 def test_json_dump_arg():

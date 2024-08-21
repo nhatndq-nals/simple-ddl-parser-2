@@ -2,8 +2,8 @@ from typing import Dict, List, Optional
 
 from ply.lex import LexToken
 
-from simple_ddl_parser import tokens as tok
-from simple_ddl_parser.dialects import (
+from simple_ddl_parser_2 import tokens as tok
+from simple_ddl_parser_2.dialects import (
     HQL,
     MSSQL,
     PSQL,
@@ -17,8 +17,8 @@ from simple_ddl_parser.dialects import (
     Snowflake,
     SparkSQL,
 )
-from simple_ddl_parser.exception import SimpleDDLParserException
-from simple_ddl_parser.parser import Parser
+from simple_ddl_parser_2.exception import SimpleDDLParserException
+from simple_ddl_parser_2.parser import Parser
 
 
 # "DDLParserError" is an alias for backward compatibility

@@ -1,6 +1,6 @@
 from typing import List
 
-from simple_ddl_parser.utils import check_spec, remove_par
+from simple_ddl_parser_2.utils import check_spec, remove_par
 
 
 class HQL:

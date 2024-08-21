@@ -1,6 +1,6 @@
 from typing import List, Union
 
-from simple_ddl_parser.utils import remove_par
+from simple_ddl_parser_2.utils import remove_par
 
 
 # todo: move to utils module

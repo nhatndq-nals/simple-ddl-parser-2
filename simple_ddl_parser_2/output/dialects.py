@@ -1,7 +1,7 @@
 from dataclasses import Field, dataclass, field
 from typing import Callable, Dict, List, Optional
 
-from simple_ddl_parser.output.base_data import BaseData
+from simple_ddl_parser_2.output.base_data import BaseData
 
 
 def update_bigquery_output(statement: dict) -> dict:

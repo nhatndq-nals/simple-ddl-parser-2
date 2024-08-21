@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from simple_ddl_parser.output.base_data import BaseData
-from simple_ddl_parser.output.dialects import CommonDialectsFieldsMixin, dialect_by_name
+from simple_ddl_parser_2.output.base_data import BaseData
+from simple_ddl_parser_2.output.dialects import CommonDialectsFieldsMixin, dialect_by_name
 
 __all__ = [
     "TableData",

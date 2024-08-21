@@ -4,8 +4,8 @@ import os
 import pprint
 import sys
 
-from simple_ddl_parser import parse_from_file
-from simple_ddl_parser.output.dialects import dialect_by_name
+from simple_ddl_parser_2 import parse_from_file
+from simple_ddl_parser_2.output.dialects import dialect_by_name
 
 logger = logging.getLogger("simple_ddl_parser")
 

@@ -1,6 +1,6 @@
 import os
 
-from simple_ddl_parser import parse_from_file
+from simple_ddl_parser_2 import parse_from_file
 
 
 def test_parse_from_file_one_table():

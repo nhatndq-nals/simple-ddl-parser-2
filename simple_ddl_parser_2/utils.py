@@ -2,7 +2,7 @@ import re
 from typing import Any, List, Optional, Tuple, Union
 
 # Backward compatibility import
-from simple_ddl_parser.exception import SimpleDDLParserException
+from simple_ddl_parser_2.exception import SimpleDDLParserException
 
 __all__ = [
     "remove_par",
