@@ -1,12 +1,13 @@
 [tool.poetry]
 name = "simple-ddl-parser-2"
-version = "1.0.0"
+version = "0.1.0"
 description = "This is fork project from https://github.com/xnuinside/simple-ddl-parser"
 authors = ["NhatNDQ <nhatndq-nals@nal.vn>"]
 license = "MIT"
 readme = "docs/README.rst"
 homepage = "https://github.com/nhatndq-nals/simple-ddl-parser-2"
 repository = "https://github.com/nhatndq-nals/simple-ddl-parser-2"
+keywords = ["python", "package"]
 classifiers = [
     "Programming Language :: PL/SQL",
     "Programming Language :: SQL",
@@ -43,5 +44,5 @@ mistune = "0.8.4"
 sdp = 'simple_ddl_parser.cli:main'
 
 [build-system]
-requires = ["setuptools>=42", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
