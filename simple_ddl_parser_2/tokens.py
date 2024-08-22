@@ -41,7 +41,6 @@ common_statements = {
     "OPTIONS",
     # snoflake
     "TAG",
-    "IN",
 }
 common_statements = {value: value for value in common_statements}
 
@@ -66,7 +65,6 @@ columns_definition = {
     "VISIBLE",
     "INVISIBLE",
     "AUTOINCREMENT",
-    "GENERATED",
     "BY",
 }
 columns_definition = {value: value for value in columns_definition}
@@ -167,6 +165,7 @@ tokens = tuple(
             "RT",
             "COMMAT",
             "EQ",
+            "IDENTITY",
         ],
         *definition_statements.values(),
         *common_statements.values(),
