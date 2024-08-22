@@ -122,6 +122,11 @@ class DDLParser(Parser, Dialects):
         t.type = "EQ"
         return self.set_last_token(t)
 
+    def t_IDENTITY(self, t: LexToken) -> LexToken:
+        r"(?i:IDENTITY)\b"
+        t.type = "IDENTITY"
+        return self.set_last_token(t)
+
     def t_DOT(self, t: LexToken) -> LexToken:
         r"(\.)+"
         t.type = "DOT"

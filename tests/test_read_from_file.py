@@ -93,6 +93,13 @@ def test_parse_from_file_generated_by_default():
                 {
                     "check": None,
                     "default": None,
+                    "generated": {
+                        "always": True,
+                        "as": "IDENTITY(INCREMENT BY 1 MINVALUE 1 "
+                        "MAXVALUE 9223372036854775807 START 1 CACHE "
+                        "1 NO CYCLE)",
+                        "stored": False,
+                    },
                     "name": '"id"',
                     "nullable": False,
                     "references": None,
@@ -246,11 +253,6 @@ def test_parse_from_file_generated_by_default():
     ]
     current_path = os.path.dirname(os.path.abspath(__file__))
 
-    print(
-        parse_from_file(
-            os.path.join(current_path, "sql", "test_generated_by_default.sql")
-        )
-    )
     assert expected == parse_from_file(
         os.path.join(current_path, "sql", "test_generated_by_default.sql")
     )
