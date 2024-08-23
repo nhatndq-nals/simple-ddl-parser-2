@@ -12,7 +12,6 @@ def test_int_identity_type():
 
     result = DDLParser(ddl).run(group_by_type=True, output_mode="mssql")
     expected = {
-        "comments": [" NOTE"],
         "ddl_properties": [],
         "sequences": [],
         "domains": [],
@@ -26,6 +25,7 @@ def test_int_identity_type():
                         "check": None,
                         "default": None,
                         "name": "id",
+                        "comment": " NOTE",
                         "nullable": False,
                         "references": None,
                         "size": None,
@@ -69,7 +69,6 @@ def test_mssql_foreign_ref_in_column():
 
     result = DDLParser(ddl).run(group_by_type=True, output_mode="mssql")
     expected = {
-        "comments": [" NOTE", " ADD THIS COLUMN FOR THE FOREIGN KEY"],
         "ddl_properties": [],
         "sequences": [],
         "domains": [],
@@ -83,6 +82,7 @@ def test_mssql_foreign_ref_in_column():
                         "check": None,
                         "default": None,
                         "name": "id",
+                        "comment": " NOTE",
                         "nullable": False,
                         "references": None,
                         "size": None,
@@ -104,6 +104,7 @@ def test_mssql_foreign_ref_in_column():
                         "check": None,
                         "default": None,
                         "name": "primary_id",
+                        "comment": " ADD THIS COLUMN FOR THE FOREIGN KEY",
                         "nullable": True,
                         "references": {
                             "column": "PersonID",
@@ -197,7 +198,6 @@ def test_constraint_unique():
 
     result = DDLParser(ddl).run(group_by_type=True, output_mode="mssql")
     expected = {
-        "comments": [" NOTE"],
         "sequences": [],
         "ddl_properties": [],
         "domains": [],
@@ -211,6 +211,7 @@ def test_constraint_unique():
                         "check": None,
                         "default": None,
                         "name": "id",
+                        "comment": " NOTE",
                         "nullable": False,
                         "references": None,
                         "size": None,
@@ -273,7 +274,6 @@ def test_constraint_unique_none():
 
     result = DDLParser(ddl).run(group_by_type=True, output_mode="mssql")
     expected = {
-        "comments": [" NOTE"],
         "sequences": [],
         "ddl_properties": [],
         "domains": [],
@@ -287,6 +287,7 @@ def test_constraint_unique_none():
                         "check": None,
                         "default": None,
                         "name": "id",
+                        "comment": " NOTE",
                         "nullable": False,
                         "references": None,
                         "size": None,
@@ -371,14 +372,6 @@ def test_two_unique_constructs():
 
     result = DDLParser(ddl).run(group_by_type=True, output_mode="mssql")
     expected = {
-        "comments": [
-            " NOTE",
-            " ADD THIS COLUMN FOR THE FOREIGN KEY",
-            " added to demonstrate sql sever Defaults",
-            " added to demonstrate sql sever Defaults",
-            " Sql Server Defaults to Null",
-            " Sql Server Defaults to Null",
-        ],
         "sequences": [],
         "ddl_properties": [],
         "domains": [],
@@ -397,6 +390,7 @@ def test_two_unique_constructs():
                         "check": None,
                         "default": None,
                         "name": "id",
+                        "comment": " NOTE",
                         "nullable": False,
                         "references": None,
                         "size": None,
@@ -418,6 +412,7 @@ def test_two_unique_constructs():
                         "check": None,
                         "default": None,
                         "name": "primary_id",
+                        "comment": " ADD THIS COLUMN FOR THE FOREIGN KEY",
                         "nullable": True,
                         "references": {
                             "column": "PersonID",
@@ -635,6 +630,7 @@ def test_two_unique_constructs():
                         "check": None,
                         "default": "GETDATE()",
                         "name": "oder_date",
+                        "comment": " added to demonstrate sql sever Defaults",
                         "nullable": True,
                         "references": None,
                         "size": None,
@@ -645,6 +641,7 @@ def test_two_unique_constructs():
                         "check": None,
                         "default": "'Sandnes'",
                         "name": "country",
+                        "comment": " added to demonstrate sql sever Defaults",
                         "nullable": True,
                         "references": None,
                         "size": 255,
@@ -665,6 +662,7 @@ def test_two_unique_constructs():
                         "check": None,
                         "default": None,
                         "name": "home_size",
+                        "comment": " Sql Server Defaults to Null",
                         "nullable": True,
                         "references": None,
                         "size": None,
@@ -675,6 +673,7 @@ def test_two_unique_constructs():
                         "check": None,
                         "default": None,
                         "name": "user_photo",
+                        "comment": " Sql Server Defaults to Null",
                         "nullable": True,
                         "references": None,
                         "size": None,
@@ -765,14 +764,6 @@ def test_foreign_keys():
 
     result = DDLParser(ddl).run(group_by_type=True, output_mode="mssql")
     expected = {
-        "comments": [
-            " NOTE",
-            " ADD THIS COLUMN FOR THE FOREIGN KEY",
-            " added to demonstrate sql sever Defaults",
-            " added to demonstrate sql sever Defaults",
-            " Sql Server Defaults to Null",
-            " Sql Server Defaults to Null",
-        ],
         "sequences": [],
         "domains": [],
         "schemas": [],
@@ -790,6 +781,7 @@ def test_foreign_keys():
                         "check": None,
                         "default": None,
                         "name": "id",
+                        "comment": " NOTE",
                         "nullable": False,
                         "references": {
                             "column": "PersonName",
@@ -818,6 +810,7 @@ def test_foreign_keys():
                         "check": None,
                         "default": None,
                         "name": "primary_id",
+                        "comment": " ADD THIS COLUMN FOR THE FOREIGN KEY",
                         "nullable": True,
                         "references": {
                             "column": "PersonID",
@@ -1002,6 +995,7 @@ def test_foreign_keys():
                         "check": None,
                         "default": "GETDATE()",
                         "name": "oder_date",
+                        "comment": " added to demonstrate sql sever Defaults",
                         "nullable": True,
                         "references": None,
                         "size": None,
@@ -1012,6 +1006,7 @@ def test_foreign_keys():
                         "check": None,
                         "default": "'Sandnes'",
                         "name": "country",
+                        "comment": " added to demonstrate sql sever Defaults",
                         "nullable": True,
                         "references": None,
                         "size": 255,
@@ -1032,6 +1027,7 @@ def test_foreign_keys():
                         "check": None,
                         "default": None,
                         "name": "home_size",
+                        "comment": " Sql Server Defaults to Null",
                         "nullable": True,
                         "references": None,
                         "size": None,
@@ -1042,6 +1038,7 @@ def test_foreign_keys():
                         "check": None,
                         "default": None,
                         "name": "user_photo",
+                        "comment": " Sql Server Defaults to Null",
                         "nullable": True,
                         "references": None,
                         "size": None,
@@ -1123,14 +1120,6 @@ def test_alter_unique():
 
     result = DDLParser(ddl).run(group_by_type=True, output_mode="mssql")
     expected = {
-        "comments": [
-            " NOTE",
-            " ADD THIS COLUMN FOR THE FOREIGN KEY",
-            " added to demonstrate sql sever Defaults",
-            " added to demonstrate sql sever Defaults",
-            " Sql Server Defaults to Null",
-            " Sql Server Defaults to Null",
-        ],
         "sequences": [],
         "ddl_properties": [],
         "domains": [],
@@ -1157,6 +1146,7 @@ def test_alter_unique():
                         "check": None,
                         "default": None,
                         "name": "id",
+                        "comment": " NOTE",
                         "nullable": False,
                         "references": {
                             "column": "PersonID",
@@ -1185,6 +1175,7 @@ def test_alter_unique():
                         "check": None,
                         "default": None,
                         "name": "primary_id",
+                        "comment": " ADD THIS COLUMN FOR THE FOREIGN KEY",
                         "nullable": True,
                         "references": {
                             "column": "PersonID",
@@ -1402,6 +1393,7 @@ def test_alter_unique():
                         "check": None,
                         "default": "GETDATE()",
                         "name": "oder_date",
+                        "comment": " added to demonstrate sql sever Defaults",
                         "nullable": True,
                         "references": None,
                         "size": None,
@@ -1412,6 +1404,7 @@ def test_alter_unique():
                         "check": None,
                         "default": "'Sandnes'",
                         "name": "country",
+                        "comment": " added to demonstrate sql sever Defaults",
                         "nullable": True,
                         "references": None,
                         "size": 255,
@@ -1432,6 +1425,7 @@ def test_alter_unique():
                         "check": None,
                         "default": None,
                         "name": "home_size",
+                        "comment": " Sql Server Defaults to Null",
                         "nullable": True,
                         "references": None,
                         "size": None,
@@ -1442,6 +1436,7 @@ def test_alter_unique():
                         "check": None,
                         "default": None,
                         "name": "user_photo",
+                        "comment": " Sql Server Defaults to Null",
                         "nullable": True,
                         "references": None,
                         "size": None,
@@ -1519,14 +1514,6 @@ def test_defaults_in_alter():
 
     result = DDLParser(ddl).run(group_by_type=True, output_mode="mssql")
     expected = {
-        "comments": [
-            " NOTE",
-            " ADD THIS COLUMN FOR THE FOREIGN KEY",
-            " added to demonstrate sql sever Defaults",
-            " added to demonstrate sql sever Defaults",
-            " Sql Server Defaults to Null",
-            " Sql Server Defaults to Null",
-        ],
         "sequences": [],
         "ddl_properties": [],
         "domains": [],
@@ -1553,6 +1540,7 @@ def test_defaults_in_alter():
                         "check": None,
                         "default": None,
                         "name": "id",
+                        "comment": " NOTE",
                         "nullable": False,
                         "references": {
                             "column": "PersonID",
@@ -1581,6 +1569,7 @@ def test_defaults_in_alter():
                         "check": None,
                         "default": None,
                         "name": "primary_id",
+                        "comment": " ADD THIS COLUMN FOR THE FOREIGN KEY",
                         "nullable": True,
                         "references": {
                             "column": "PersonID",
@@ -1648,6 +1637,7 @@ def test_defaults_in_alter():
                         "check": None,
                         "default": "GETDATE()",
                         "name": "oder_date",
+                        "comment": " added to demonstrate sql sever Defaults",
                         "nullable": True,
                         "references": None,
                         "size": None,
@@ -1658,6 +1648,7 @@ def test_defaults_in_alter():
                         "check": None,
                         "default": "'Sandnes'",
                         "name": "country",
+                        "comment": " added to demonstrate sql sever Defaults",
                         "nullable": True,
                         "references": None,
                         "size": 255,
@@ -1678,6 +1669,7 @@ def test_defaults_in_alter():
                         "check": None,
                         "default": None,
                         "name": "home_size",
+                        "comment": " Sql Server Defaults to Null",
                         "nullable": True,
                         "references": None,
                         "size": None,
@@ -1688,6 +1680,7 @@ def test_defaults_in_alter():
                         "check": None,
                         "default": None,
                         "name": "user_photo",
+                        "comment": " Sql Server Defaults to Null",
                         "nullable": True,
                         "references": None,
                         "size": None,

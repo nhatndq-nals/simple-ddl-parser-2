@@ -40,12 +40,6 @@ def test_several_indexes_types():
     result = DDLParser(ddl).run(group_by_type=True, output_mode="mssql")
     expected = {
         "comments": [
-            " NOTE THE IDENTITY",
-            " ADD THIS COLUMN FOR THE FOREIGN KEY",
-            " added to demonstrate sql sever Defaults",
-            " added to demonstrate sql sever Defaults",
-            " Sql Server Defaults to Null",
-            " Sql Server Defaults to Null",
             "- This line is commented",
         ],
         "sequences": [],
@@ -66,6 +60,7 @@ def test_several_indexes_types():
                         "check": None,
                         "default": None,
                         "name": "id",
+                        "comment": " NOTE THE IDENTITY",
                         "nullable": False,
                         "references": {
                             "column": "PersonID",
@@ -94,6 +89,7 @@ def test_several_indexes_types():
                         "check": None,
                         "default": None,
                         "name": "primary_id",
+                        "comment": " ADD THIS COLUMN FOR THE FOREIGN KEY",
                         "nullable": True,
                         "references": {
                             "column": "PersonID",
@@ -211,6 +207,7 @@ def test_several_indexes_types():
                         "check": None,
                         "default": "GETDATE()",
                         "name": "oder_date",
+                        "comment": " added to demonstrate sql sever Defaults",
                         "nullable": True,
                         "references": None,
                         "size": None,
@@ -221,6 +218,7 @@ def test_several_indexes_types():
                         "check": None,
                         "default": "'Sandnes'",
                         "name": "country",
+                        "comment": " added to demonstrate sql sever Defaults",
                         "nullable": True,
                         "references": None,
                         "size": 255,
@@ -241,6 +239,7 @@ def test_several_indexes_types():
                         "check": None,
                         "default": None,
                         "name": "home_size",
+                        "comment": " Sql Server Defaults to Null",
                         "nullable": True,
                         "references": None,
                         "size": None,
@@ -251,6 +250,7 @@ def test_several_indexes_types():
                         "check": None,
                         "default": None,
                         "name": "user_photo",
+                        "comment": " Sql Server Defaults to Null",
                         "nullable": True,
                         "references": None,
                         "size": None,
@@ -390,12 +390,6 @@ def test_clustered_index():
     result = DDLParser(ddl).run(group_by_type=True, output_mode="mssql")
     expected = {
         "comments": [
-            " NOTE",
-            " ADD THIS COLUMN FOR THE FOREIGN KEY",
-            " added to demonstrate sql sever Defaults",
-            " added to demonstrate sql sever Defaults",
-            " Sql Server Defaults to Null",
-            " Sql Server Defaults to Null",
             "- This",
         ],
         "sequences": [],
@@ -415,6 +409,7 @@ def test_clustered_index():
                         "check": None,
                         "default": None,
                         "name": "id",
+                        "comment": " NOTE",
                         "nullable": False,
                         "references": {
                             "column": "PersonID",
@@ -443,6 +438,7 @@ def test_clustered_index():
                         "check": None,
                         "default": None,
                         "name": "primary_id",
+                        "comment": " ADD THIS COLUMN FOR THE FOREIGN KEY",
                         "nullable": True,
                         "references": {
                             "column": "PersonID",
@@ -560,6 +556,7 @@ def test_clustered_index():
                         "check": None,
                         "default": "GETDATE()",
                         "name": "oder_date",
+                        "comment": " added to demonstrate sql sever Defaults",
                         "nullable": True,
                         "references": None,
                         "size": None,
@@ -570,6 +567,7 @@ def test_clustered_index():
                         "check": None,
                         "default": "'Sandnes'",
                         "name": "country",
+                        "comment": " added to demonstrate sql sever Defaults",
                         "nullable": True,
                         "references": None,
                         "size": 255,
@@ -590,6 +588,7 @@ def test_clustered_index():
                         "check": None,
                         "default": None,
                         "name": "home_size",
+                        "comment": " Sql Server Defaults to Null",
                         "nullable": True,
                         "references": None,
                         "size": None,
@@ -600,6 +599,7 @@ def test_clustered_index():
                         "check": None,
                         "default": None,
                         "name": "user_photo",
+                        "comment": " Sql Server Defaults to Null",
                         "nullable": True,
                         "references": None,
                         "size": None,
