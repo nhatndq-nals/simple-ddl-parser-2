@@ -502,6 +502,11 @@ class Column:
         p[0]["nullable"] = (
             nullable if nullable is not True else p[0].get("nullable", nullable)
         )
+
+        comment = (p[-1].get("comment") if isinstance(p[-1], dict) else None) or p[0].get("comment")
+        if comment:
+            p[0]["comment"] = comment
+
         p[0]["default"] = p[0].get("default", default)
         p[0]["check"] = p[0].get("check", None)
         if isinstance(p_list[-1], dict) and p_list[-1].get("encode"):
@@ -1059,16 +1064,24 @@ class BaseSQL(
     def p_expression_index(self, p: List) -> None:
         """expr : index_table_name LP index_pid RP
         | index_table_name USING index_type LP index_pid RP
+        | index_table_name USING index_type LP index_pid id RP
         """
         p_list = remove_par(list(p))
         p[0] = p[1]
         for item in ["detailed_columns", "columns"]:
+            column_item = p_list[-1][item] if len(p_list) < 6 else p_list[-2][item]
             if item not in p[0]:
-                p[0][item] = p_list[-1][item]
+                p[0][item] = column_item
             else:
-                p[0][item].extend(p_list[-1][item])
+                p[0][item].extend(column_item)
 
-        p[0]["index_type"] = p_list[-2]["index_type"] if "USING" in p_list else None
+        p[0]["index_type"] = None
+
+        if "USING" in p_list:
+            if len(p_list) == 5:
+                p[0]["index_type"] = p_list[-2]["index_type"]
+            if len(p_list) == 6:
+                p[0]["index_type"] = p_list[-3]["index_type"]
 
     def p_index_table_name(self, p: List) -> None:
         """index_table_name : create_index ON id

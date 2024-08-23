@@ -4,7 +4,7 @@ from simple_ddl_parser_2 import DDLParser
 def test_inherits():
     ddl = """
     CREATE TABLE public."Diagnosis_identifier" (
-        "Diagnosis_id" text NOT NULL
+        "Diagnosis_id" text NOT NULL  -- This is comment
     )
     INHERITS (public.identifier);
     """
@@ -20,6 +20,7 @@ def test_inherits():
                     "check": None,
                     "default": None,
                     "name": '"Diagnosis_id"',
+                    "comment": " This is comment",
                     "nullable": False,
                     "references": None,
                     "size": None,

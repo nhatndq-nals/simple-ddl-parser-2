@@ -789,9 +789,9 @@ def test_defaults_with_comments():
     ddl = """
 
     CREATE table v2.entitlement_requests (
-    status                varchar(10) not null default 'requested'  -- inline comment
-    ,notes                 varchar(2000) not null default 'none' -- inline comment
-    ,id          varchar(100) not null -- inline comment
+    status                varchar(10) not null default 'requested',  -- inline comment
+    notes                 varchar(2000) not null default 'none', -- inline comment
+    id          varchar(100) not null -- inline comment
     ) ;
     """
 
@@ -805,6 +805,7 @@ def test_defaults_with_comments():
                     "check": None,
                     "default": "'requested'",
                     "name": "status",
+                    'comment': ' inline comment',
                     "nullable": False,
                     "references": None,
                     "size": 10,
@@ -815,6 +816,7 @@ def test_defaults_with_comments():
                     "check": None,
                     "default": "'none'",
                     "name": "notes",
+                    'comment': ' inline comment',
                     "nullable": False,
                     "references": None,
                     "size": 2000,
@@ -825,6 +827,7 @@ def test_defaults_with_comments():
                     "check": None,
                     "default": None,
                     "name": "id",
+                    'comment': ' inline comment',
                     "nullable": False,
                     "references": None,
                     "size": 100,
@@ -838,8 +841,7 @@ def test_defaults_with_comments():
             "schema": "v2",
             "table_name": "entitlement_requests",
             "tablespace": None,
-        },
-        {"comments": [" inline comment", " inline comment", " inline comment"]},
+        }
     ]
     assert expected == result
 
