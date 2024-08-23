@@ -3,16 +3,16 @@ Simple DDL Parser
 -----------------
 
 
-.. image:: https://img.shields.io/pypi/v/simple-ddl-parser
-   :target: https://img.shields.io/pypi/v/simple-ddl-parser
+.. image:: https://img.shields.io/pypi/v/simple-ddl-parser-2
+   :target: https://img.shields.io/pypi/v/simple-ddl-parser-2
    :alt: badge1
 
-.. image:: https://img.shields.io/pypi/l/simple-ddl-parser
-   :target: https://img.shields.io/pypi/l/simple-ddl-parser
+.. image:: https://img.shields.io/pypi/l/simple-ddl-parser-2
+   :target: https://img.shields.io/pypi/l/simple-ddl-parser-2
    :alt: badge2
 
-.. image:: https://img.shields.io/pypi/pyversions/simple-ddl-parser
-   :target: https://img.shields.io/pypi/pyversions/simple-ddl-parser
+.. image:: https://img.shields.io/pypi/pyversions/simple-ddl-parser-2
+   :target: https://img.shields.io/pypi/pyversions/simple-ddl-parser-2
    :alt: badge3
 
 .. image:: https://github.com/xnuinside/simple-ddl-parser/actions/workflows/main.yml/badge.svg

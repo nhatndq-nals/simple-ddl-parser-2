@@ -94,6 +94,7 @@ class Parser:
         self.statement = None
         self.block_comments = []
         self.comments = []
+        self.column_comments = []
 
         # self.comma_only_str = re.compile(r"((\')|(' ))+(,)((\')|( '))+\B")
         self.equal_without_space = re.compile(r"(\b)=")
@@ -132,6 +133,7 @@ class Parser:
         else:
             splitted_line = line.split(IN_COM)
             code_line = splitted_line[0]
+            self.column_comments.append(code_line.split()[0].replace(",", ""))
             self.comments.append(splitted_line[1])
         return code_line
 
@@ -311,6 +313,17 @@ class Parser:
 
     def parse_statement(self) -> None:
         _parse_result = yacc.parse(self.statement)
+
+        if self.column_comments and self.comments:
+            for column in _parse_result["columns"]:
+                if not isinstance(column, dict):
+                    continue
+                if self.column_comments and self.comments \
+                    and self.column_comments[0] == column["name"]:
+                    column["comment"] = self.comments[0]
+                    self.column_comments.remove(column["name"])
+                    self.comments.remove(column["comment"])
+
         if _parse_result:
             self.tables.append(_parse_result)
 

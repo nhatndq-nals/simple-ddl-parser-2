@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "simple-ddl-parser-2"
-version = "0.1.2"
+version = "0.1.2.beta"
 description = "This is fork project from https://github.com/xnuinside/simple-ddl-parser"
 authors = ["NhatNDQ <nhatndq-nals@nal.vn>"]
 license = "MIT"
