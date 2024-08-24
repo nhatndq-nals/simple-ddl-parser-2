@@ -311,11 +311,9 @@ class Parser:
         else:
             self.statement = None
 
-    def parse_statement(self) -> None:
-        _parse_result = yacc.parse(self.statement)
-
-        if self.column_comments and self.comments:
-            for column in _parse_result["columns"]:
+    def add_comment_to_table_column(self, parse_result) -> None:
+        if self.column_comments and self.comments and isinstance(parse_result, dict):
+            for column in parse_result.get("columns", []):
                 if not isinstance(column, dict):
                     continue
                 if self.column_comments and self.comments \
@@ -323,6 +321,11 @@ class Parser:
                     column["comment"] = self.comments[0]
                     self.column_comments.remove(column["name"])
                     self.comments.remove(column["comment"])
+
+    def parse_statement(self) -> None:
+        _parse_result = yacc.parse(self.statement)
+
+        self.add_comment_to_table_column(_parse_result)
 
         if _parse_result:
             self.tables.append(_parse_result)
