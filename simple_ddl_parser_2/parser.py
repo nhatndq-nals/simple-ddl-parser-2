@@ -315,7 +315,7 @@ class Parser:
         _parse_result = yacc.parse(self.statement)
 
         if self.column_comments and self.comments:
-            for column in _parse_result["columns"]:
+            for column in _parse_result.get("columns", []):
                 if not isinstance(column, dict):
                     continue
                 if self.column_comments and self.comments \
