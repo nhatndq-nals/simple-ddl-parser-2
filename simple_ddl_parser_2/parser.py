@@ -312,12 +312,13 @@ class Parser:
             self.statement = None
 
     def add_comment_to_table_column(self, parse_result) -> None:
-        if self.column_comments and self.comments and isinstance(parse_result, dict):
+        if not self.column_comments or not self.comments:
+            return
+        if isinstance(parse_result, dict):
             for column in parse_result.get("columns", []):
                 if not isinstance(column, dict):
                     continue
-                if self.column_comments and self.comments \
-                    and self.column_comments[0] == column["name"]:
+                if self.column_comments and self.comments and self.column_comments[0] == column["name"]:
                     column["comment"] = self.comments[0]
                     self.column_comments.remove(column["name"])
                     self.comments.remove(column["comment"])
